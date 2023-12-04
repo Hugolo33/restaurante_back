@@ -14,7 +14,7 @@ const create = async (req, res) => {
 
         res.json(newUser);
     } catch (error) {
-        res.json({ fatal: error.message });
+        res.json({ error: error.message });
     }
 }
 
@@ -41,8 +41,25 @@ const login = async (req, res) => {
 
 const update = async (req, res) => {
     const { userId } = req.params
+    try {
+        const [result] = await UserModel.updateById(userId, req.body)
+        const [updatedUser] = await UserModel.selectById(userId)
+        res.json(updatedUser)
+    } catch (error) {
+        res.json({ error: error.message })
+    }
+}
 
+const deleteById = async (req, res) => {
+    const { userId } = req.params
+    try {
+        const [deletedUser] = await UserModel.selectById(userId)
+        const [result] = await UserModel.remove(userId)
+        res.json(deletedUser)
+    } catch (error) {
+        res.json({ error: error.message })
+    }
 }
 
 
-module.exports = { create, login, update };
+module.exports = { create, login, update, deleteById };
