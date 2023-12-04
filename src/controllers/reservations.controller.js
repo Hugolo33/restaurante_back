@@ -40,7 +40,7 @@ const removeReservationId = async (req, res) => {
     const { reservationId } = req.params
 
     try {
-        const [result] = await reservationsModel.deleteReservationById(reservationId)
+        const [result] = await reservationsModel.updateReservation(reservationId)
         res.json(result)
 
     } catch(error) {

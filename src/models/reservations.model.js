@@ -9,8 +9,8 @@ const insertTable = ({ r_date, diners, notes, user_id, spot_id, shift_id }) => {
 }
 
 
-const updateReservation = (reservationId, { r_date, diners, notes, user_id, spot_id, shift_id }) => {
-    return db.query("update reservations set r_date = ?, diners = ?, notes = ?, user_id = ?, spot_id = ?, shift_id = ? where id = ?)", [r_date, diners, notes, user_id, spot_id, shift_id, reservationId])
+const updateReservation = (reservationId, {r_date, diners, notes, user_id, spot_id, shift_id}) => {
+    return db.query("update reservations set r_date = ?, diners = ?, notes = ?, user_id = ?, spot_id = ?, shift_id = ? where id = ?", [r_date, diners, notes, user_id, spot_id, shift_id, reservationId])
 }
 
 
