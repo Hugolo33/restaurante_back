@@ -7,8 +7,8 @@ const { checkRole } = require("../../helpers/middlewares.js")
 
 // - Crea un nuevo menú menú de ese día
 
-router.get('/', menuController.getAllMenus);
+router.get('/', checkRole, menuController.getAllMenus);
 router.get('/:menuId', menuController.getMenuById)
-router.post('/', menuController.createMenu);
+router.post('/', checkRole, menuController.createMenu);
 
 module.exports = router;
