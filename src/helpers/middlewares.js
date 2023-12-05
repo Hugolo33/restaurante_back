@@ -22,6 +22,7 @@ const checkToken = async (req, res, next) => {
 
 const checkRole = (role) => {
     return (req, res, next) => {
+
         if (req.user.role !== 'admin') {
             return res.json({ error: 'No tienes asignado el rol necesario para poder entrar aquí' })
         }
