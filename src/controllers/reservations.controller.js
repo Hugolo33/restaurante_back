@@ -5,33 +5,42 @@ const getAllReservations = async (req, res) => {
         const [result] = await reservationsModel.selectAll()
         res.json(result)
 
-    } catch(error) {
+    } catch (error) {
         res.json({ fatal: error.message })
     }
 }
 
-const getUserReservations = (req, res) => {
-    res.end("PROBANDO GET")
+const getUserReservations = async (req, res) => {
+    const { userId } = req.params
+    try {
+        const [result] = await reservationsModel.selectByUserId(userId)
+        res.json(result)
+    } catch (error) {
+        res.json({ error: error.message })
+    }
 }
 
 const addTable = async (req, res) => {
     try {
         const [result] = await reservationsModel.insertTable(req.body)
-        res.json(result)
-
-    } catch(error) {
+        const { insertId } = result
+        const [newReservation] = await reservationsModel.selectById(insertId)
+        res.json(newReservation)
+    } catch (error) {
         res.json({ fatal: error.message })
     }
 }
 
 const updateReservation = async (req, res) => {
     const { reservationId } = req.params
-
+    const userId = req.user.id;
     try {
-        const [result] = await reservationsModel.updateReservation(reservationId,req.body)
-        res.json(result)
+        req.body.id = userId
+        const [result] = await reservationsModel.updateReservation(reservationId, req.body)
+        const [updatedReservation] = await reservationsModel.selectById(reservationId)
+        res.json(updatedReservation[0])
 
-    } catch(error) {
+    } catch (error) {
         res.json({ fatal: error.message })
     }
 }
@@ -43,7 +52,7 @@ const removeReservationId = async (req, res) => {
         const [result] = await reservationsModel.updateReservation(reservationId)
         res.json(result)
 
-    } catch(error) {
+    } catch (error) {
         res.json({ fatal: error.message })
     }
 }
