@@ -5,7 +5,7 @@ const { checkRole, checkToken } = require('../../helpers/middlewares');
 
 router.get('/', checkToken, checkRole('admin'), reviewController.getAll);
 
-router.post('/', checkToken, reviewController.create);
+router.post('/:reservationId', checkToken, reviewController.create);
 
 
 module.exports = router;

@@ -21,7 +21,9 @@ const getAll = async (req, res) => {
 
 const create = async (req, res) => {
     try {
-        const [result] = await ReviewModel.insert(req.body, req.user.id);
+        const { reservationId } = req.params
+
+        const [result] = await ReviewModel.insert(req.body, req.user.id, reservationId);
         const { insertId } = result
         const [newReview] = await ReviewModel.selectById(insertId)
         res.json(newReview[0]);
