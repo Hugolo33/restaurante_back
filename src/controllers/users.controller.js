@@ -53,7 +53,10 @@ const update = async (req, res) => {
 const deleteById = async (req, res) => {
     const { userId } = req.params
     try {
-        const [deletedUser] = await UserModel.selectById(userId)
+        const [deletedUser] = await UserModel.selectById(userId);
+        if (deletedUser[0].role === 'admin') {
+            return res.json({ error: 'El admin no puede ser borrado' })
+        }
         const [result] = await UserModel.remove(userId)
         res.json(deletedUser)
     } catch (error) {
