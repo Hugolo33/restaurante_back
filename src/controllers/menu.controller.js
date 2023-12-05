@@ -1,7 +1,7 @@
 const menuModel = require('../models/menu.model');
 
 
-const getAllMenus = async (req, res) => {
+const getAll = async (req, res) => {
     // si la peticion atraviesa con extio el metodo checkToken, puedo acceder al valor de req.user
 
     // console.log('FINAL', req.user);
@@ -28,7 +28,7 @@ const getMenuById = async (req, res) => {
         res.json({ fatal: error.message });
     }
 }
-const createMenu = async (req, res) => {
+const create = async (req, res) => {
     try {
         const [result] = await menuModel.insert(req.body);
 
@@ -43,7 +43,7 @@ const createMenu = async (req, res) => {
 
 
 module.exports = {
-    getAllMenus,
+    getAll,
     getMenuById,
-    createMenu
+    create
 }

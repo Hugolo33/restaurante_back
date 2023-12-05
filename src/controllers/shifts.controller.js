@@ -1,32 +1,32 @@
 const shiftsModel = require("../models/shifts.model")
 
-const getAllShifts = async (req, res) => {
-    
+const getAll = async (req, res) => {
+
     try {
         const [result] = await shiftsModel.selectAll()
         res.json(result)
 
-    } catch(error) {
+    } catch (error) {
         res.json({ fatal: error.message })
     }
 }
 
-const createShift = async (req, res) => {
-    
+const create = async (req, res) => {
+
     try {
-        const [result] = await shiftsModel.insertShift(req.body)
+        const [result] = await shiftsModel.insert(req.body)
         res.json(result)
 
-    } catch(error) {
+    } catch (error) {
         res.json({ fatal: error.message })
     }
 }
 
-const updateShift = async (req, res) => {
+const update = async (req, res) => {
     const { shiftId } = req.params
 
     try {
-        const [result] = await shiftsModel.updateShiftById(shiftId, req.body)
+        const [result] = await shiftsModel.updateById(shiftId, req.body)
         res.json(result)
 
     } catch (error) {
@@ -35,11 +35,11 @@ const updateShift = async (req, res) => {
 
 }
 
-const removeShift = async (req, res) => {
+const remove = async (req, res) => {
     const { shiftId } = req.params
 
     try {
-        const [result] = await shiftsModel.deleteShiftById(shiftId)
+        const [result] = await shiftsModel.deleteById(shiftId)
         res.json(result)
 
     } catch (error) {
@@ -50,4 +50,4 @@ const removeShift = async (req, res) => {
 
 
 
-module.exports = { getAllShifts, createShift, updateShift, removeShift }
+module.exports = { getAll, create, update, remove }

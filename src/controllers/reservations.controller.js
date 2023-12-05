@@ -1,6 +1,6 @@
 const reservationsModel = require("../models/reservations.model")
 
-const getAllReservations = async (req, res) => {
+const getAll = async (req, res) => {
     try {
         const [result] = await reservationsModel.selectAll()
         res.json(result)
@@ -10,7 +10,7 @@ const getAllReservations = async (req, res) => {
     }
 }
 
-const getUserReservations = async (req, res) => {
+const getUser = async (req, res) => {
     const { userId } = req.params
     try {
         const [result] = await reservationsModel.selectByUserId(userId)
@@ -22,7 +22,7 @@ const getUserReservations = async (req, res) => {
 
 const addTable = async (req, res) => {
     try {
-        const [result] = await reservationsModel.insertTable(req.body)
+        const [result] = await reservationsModel.insert(req.body)
         const { insertId } = result
         const [newReservation] = await reservationsModel.selectById(insertId)
         res.json(newReservation)
@@ -31,12 +31,12 @@ const addTable = async (req, res) => {
     }
 }
 
-const updateReservation = async (req, res) => {
+const update = async (req, res) => {
     const { reservationId } = req.params
     const userId = req.user.id;
     try {
         req.body.id = userId
-        const [result] = await reservationsModel.updateReservation(reservationId, req.body)
+        const [result] = await reservationsModel.update(reservationId, req.body)
         const [updatedReservation] = await reservationsModel.selectById(reservationId)
         res.json(updatedReservation[0])
 
@@ -45,11 +45,11 @@ const updateReservation = async (req, res) => {
     }
 }
 
-const removeReservationId = async (req, res) => {
+const removeId = async (req, res) => {
     const { reservationId } = req.params
 
     try {
-        const [result] = await reservationsModel.updateReservation(reservationId)
+        const [result] = await reservationsModel.update(reservationId)
         res.json(result)
 
     } catch (error) {
@@ -58,5 +58,5 @@ const removeReservationId = async (req, res) => {
 }
 
 
-module.exports = { getAllReservations, getUserReservations, addTable, updateReservation, removeReservationId }
+module.exports = { getAll, getUser, addTable, update, removeId }
 
