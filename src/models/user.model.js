@@ -1,6 +1,6 @@
 // BODY: name, email, password, phone_number, role
 
-const insert = ({ name, email, password, phone_number, role = 'trabajador' }) => {
+const insert = ({ name, email, password, phone_number, role = 'client' }) => {
     return db.query(
         'insert into users (name, email, password, phone_number, role) values (?, ?, ?, ?, ?)',
         [name, email, password, phone_number, role]
