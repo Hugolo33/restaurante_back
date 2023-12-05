@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { checkToken } = require('../helpers/middlewares')
+const { checkRole, checkToken } = require("../helpers/middlewares")
 
 router.use('/users', require('./api/users'))
 
@@ -9,6 +9,6 @@ router.use('/menu', require('./api/menu'))
 
 router.use('/reviews', require('./api/reviews'))
 
-router.use("/shifts", require)
+router.use("/shifts", checkToken, checkRole('admin'), require("./api/shifts"))
 
 module.exports = router
