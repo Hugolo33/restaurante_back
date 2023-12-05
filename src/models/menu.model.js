@@ -2,7 +2,7 @@
 
 
 const selectAll = () => {
-    return db.query('select * from menu');
+    return db.query('select * from menu order by m_date desc');
 }
 
 const selectId = (id) => {
@@ -11,7 +11,7 @@ const selectId = (id) => {
 
 const insert = ({ date, first_course, main_course }) => {
 
-    return db.query('insert into menu (date, first_course, main_course) values (?,?,?)', [date, first_course, main_course]);
+    return db.query('insert into menu (m_date, first_course, main_course) values (?,?,?)', [date, first_course, main_course]);
 }
 
 
