@@ -54,6 +54,9 @@ const deleteById = async (req, res) => {
     const { userId } = req.params
     try {
         const [deletedUser] = await UserModel.selectById(userId);
+        if (deletedUser.length === 0) {
+            return res.json({ error: 'El usuario no existe' })
+        }
         if (deletedUser[0].role === 'admin') {
             return res.json({ error: 'El admin no puede ser borrado' })
         }
