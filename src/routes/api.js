@@ -8,4 +8,6 @@ router.use('/menu', require('./api/menu'))
 
 router.use('/reviews', require('./api/reviews'))
 
+router.use("/shifts", require)
+
 module.exports = router
