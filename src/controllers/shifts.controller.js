@@ -11,7 +11,43 @@ const getAllShifts = async (req, res) => {
     }
 }
 
+const createShift = async (req, res) => {
+    
+    try {
+        const [result] = await shiftsModel.insertShift(req.body)
+        res.json(result)
+
+    } catch(error) {
+        res.json({ fatal: error.message })
+    }
+}
+
+const updateShift = async (req, res) => {
+    const { shiftId } = req.params
+
+    try {
+        const [result] = await shiftsModel.updateShiftById(shiftId, req.body)
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+
+}
+
+const removeShift = async (req, res) => {
+    const { shiftId } = req.params
+
+    try {
+        const [result] = await shiftsModel.deleteShiftById(shiftId)
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
 
 
 
-module.exports = { getAllShifts }
+
+module.exports = { getAllShifts, createShift, updateShift, removeShift }
