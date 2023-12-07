@@ -6,8 +6,9 @@ const { checkRole, checkToken } = require("../../helpers/middlewares.js")
 // POST api/menu
 
 
-router.get('/', checkToken, checkRole('admin'), menuController.getAllMenus);
-router.get('/:menuId', menuController.getMenuById)
-router.post('/', checkToken, checkRole('admin'), menuController.createMenu);
+router.get('/', checkToken, checkRole('admin'), menuController.getAll);
+router.get('/latest', menuController.getLatest);
+router.get('/:menuId', menuController.getMenuById);
+router.post('/', checkToken, checkRole('admin'), menuController.create);
 
 module.exports = router;

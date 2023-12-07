@@ -6,14 +6,14 @@ const { checkRole } = require('../../helpers/middlewares')
 
 // la url viene con /api/reservations
 
-router.get("/", checkRole('admin'), reservationsController.getAllReservations)
-router.get("/:userId", reservationsController.getUserReservations)
+router.get("/", checkRole('admin'), reservationsController.getAll)
+router.get("/:userId", reservationsController.getUser)
 
 router.post("/", checkRole('admin'), reservationsController.addTable)
 
-router.put("/:reservationId", reservationsController.updateReservation)
+router.put("/:reservationId", reservationsController.update)
 
-router.delete("/:reservationId", reservationsController.removeReservationId)
+router.delete("/:reservationId", reservationsController.removeId)
 
 
 module.exports = router

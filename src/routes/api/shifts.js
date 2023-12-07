@@ -4,13 +4,13 @@ const shiftsController = require("../../controllers/shifts.controller")
 
 // la url viene con /api/shifts
 
-router.get("/", shiftsController.getAllShifts)
+router.get("/", shiftsController.getAll)
 
-router.post("/", shiftsController.createShift)
+router.post("/", shiftsController.create)
 
-router.put("/:shiftId", shiftsController.updateShift)
+router.put("/:shiftId", shiftsController.update)
 
-router.delete("/:shiftId", shiftsController.removeShift)
+router.delete("/:shiftId", shiftsController.remove)
 
 
 module.exports = router

@@ -13,6 +13,17 @@ const getAll = async (req, res) => {
     res.json(result);
 }
 
+const getLatest = async (req, res) => {
+
+
+    const [result] = await menuModel.selectLatest();
+    const lastMenu = result[0];
+    res.json(lastMenu);
+}
+
+
+
+
 const getMenuById = async (req, res) => {
     try {
         const menuId = req.params.menuId;
@@ -45,5 +56,6 @@ const create = async (req, res) => {
 module.exports = {
     getAll,
     getMenuById,
-    create
+    create,
+    getLatest
 }
