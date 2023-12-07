@@ -33,4 +33,19 @@ const create = async (req, res) => {
     }
 };
 
-module.exports = { getAll, create };
+const remove = async (req, res) => {
+    try {
+        const { reviewId } = req.params;
+        const [deletedReview] = await ReviewModel.selectById(reviewId)
+        const [result] = await ReviewModel.remove(reviewId)
+
+        res.json(deletedReview)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+
+}
+
+
+module.exports = { getAll, create, remove };
