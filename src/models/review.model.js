@@ -1,5 +1,5 @@
 const selectAll = () => {
-    return db.query('select * from reviews');
+    return db.query('select * from reviews order by date_added desc');
 };
 
 const selectById = (id) => {
