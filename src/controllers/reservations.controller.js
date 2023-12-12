@@ -19,6 +19,25 @@ const getAllByShifts = async (req, res) => {
         res.json({ fatal: error.message })
     }
 }
+const getAllBeforeToday = async (req, res) => {
+    try {
+        const [result] = await reservationsModel.selectBeforeToday()
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
+
+const getAllAfterToday = async (req, res) => {
+    try {
+        const [result] = await reservationsModel.selectAfterToday()
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
 
 
 const getUser = async (req, res) => {
@@ -70,5 +89,5 @@ const removeId = async (req, res) => {
 }
 
 
-module.exports = { getAll, getUser, addTable, update, removeId, getAllByShifts }
+module.exports = { getAll, getUser, addTable, update, removeId, getAllByShifts, getAllBeforeToday, getAllAfterToday }
 

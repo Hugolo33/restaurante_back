@@ -5,6 +5,13 @@ const selectAll = () => {
 const selectAllByShifts = () => {
     return db.query("select r.*, s.time, s.daytime from reservations as r join shifts as s on r.shift_id = s.id order by r.r_date desc, s.time asc")
 }
+const selectBeforeToday = () => {
+    return db.query("select * from restaurant.reservations where r_date <= now()")
+}
+
+const selectAfterToday = () => {
+    return db.query("select * from restaurant.reservations where r_date >= now()")
+}
 
 const selectById = (reservationId) => {
     return db.query('select * from reservations where id = ?', [reservationId])
@@ -29,4 +36,4 @@ const selectByUserId = (userId) => {
 }
 
 
-module.exports = { selectAll, selectById, insert, update, deleteById, selectByUserId, selectAllByShifts }
+module.exports = { selectAll, selectById, insert, update, deleteById, selectByUserId, selectAllByShifts, selectBeforeToday, selectAfterToday }
