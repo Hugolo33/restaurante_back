@@ -10,6 +10,17 @@ const getAll = async (req, res) => {
     }
 }
 
+const getAllByShifts = async (req, res) => {
+    try {
+        const [result] = await reservationsModel.selectAllByShifts()
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
+
+
 const getUser = async (req, res) => {
     const { userId } = req.params
     try {
@@ -32,6 +43,7 @@ const addTable = async (req, res) => {
 }
 
 const update = async (req, res) => {
+
     const { reservationId } = req.params
     const userId = req.user.id;
     try {
@@ -58,5 +70,5 @@ const removeId = async (req, res) => {
 }
 
 
-module.exports = { getAll, getUser, addTable, update, removeId }
+module.exports = { getAll, getUser, addTable, update, removeId, getAllByShifts }
 
