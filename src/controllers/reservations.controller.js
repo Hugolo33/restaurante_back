@@ -10,7 +10,7 @@ const getAll = async (req, res) => {
     }
 }
 
-const getAllByShifts = async (req, res) => {
+const postAllByShifts = async (req, res) => {
     try {
         const [result] = await reservationsModel.selectAllByShifts(req.body)
         res.json(result)
@@ -89,5 +89,5 @@ const removeId = async (req, res) => {
 }
 
 
-module.exports = { getAll, getUser, addTable, update, removeId, getAllByShifts, getAllBeforeToday, getAllAfterToday }
+module.exports = { getAll, getUser, addTable, update, removeId, postAllByShifts, getAllBeforeToday, getAllAfterToday }
 
