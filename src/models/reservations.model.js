@@ -9,6 +9,14 @@ const selectBeforeToday = () => {
     return db.query("select * from restaurant.reservations where r_date <= now()")
 }
 
+const selectByUserBeforeToday = (userId) => {
+    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date <= now()order by r.r_date desc', [userId])
+}
+
+const selectByUserAfterToday = (userId) => {
+    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date >= now()order by r.r_date asc, s.time asc', [userId])
+}
+
 const selectAfterToday = () => {
     return db.query("select * from restaurant.reservations where r_date >= now()")
 }
@@ -36,4 +44,4 @@ const selectByUserId = (userId) => {
 }
 
 
-module.exports = { selectAll, selectById, insert, update, deleteById, selectByUserId, selectAllByShifts, selectBeforeToday, selectAfterToday }
+module.exports = { selectAll, selectById, insert, update, deleteById, selectByUserId, selectAllByShifts, selectBeforeToday, selectAfterToday, selectByUserBeforeToday, selectByUserAfterToday }

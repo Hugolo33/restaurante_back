@@ -9,21 +9,19 @@ const getAll = async (req, res) => {
     }
 };
 
-// const getById = async (req, res) => {
-//     try {
-//         const { userId } = req.params;
-//         const [result] = await ReviewModel.selectById(userId);
-//         res.json(result);
-//     } catch (error) {
-//         res.json({ error: error.message });
-//     }
-// };
+const getById = async (req, res) => {
+    try {
+        const { reviewId } = req.params;
+        const [result] = await ReviewModel.selectById(reviewId);
+        res.json(result[0]);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+};
 
 const create = async (req, res) => {
     try {
-        const { reservationId } = req.params
-
-        const [result] = await ReviewModel.insert(req.body, req.user.id, reservationId);
+        const [result] = await ReviewModel.insert(req.body);
         const { insertId } = result
         const [newReview] = await ReviewModel.selectById(insertId)
         res.json(newReview[0]);
@@ -48,4 +46,4 @@ const remove = async (req, res) => {
 }
 
 
-module.exports = { getAll, create, remove };
+module.exports = { getAll, create, remove, getById };
