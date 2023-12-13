@@ -11,6 +11,6 @@ router.use('/reviews', require('./api/reviews'))
 
 router.use("/shifts", checkToken, checkRole('admin'), require("./api/shifts"))
 
-router.use('/spots', require('./api/spots'))
+router.use('/spots', checkToken, checkRole('admin'), require('./api/spots'))
 
 module.exports = router
