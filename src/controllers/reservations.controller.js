@@ -29,9 +29,32 @@ const getAllBeforeToday = async (req, res) => {
     }
 }
 
+const getByUserBeforeToday = async (req, res) => {
+    const { userId } = req.params
+    try {
+        const [result] = await reservationsModel.selectByUserBeforeToday(userId)
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
+
 const getAllAfterToday = async (req, res) => {
     try {
         const [result] = await reservationsModel.selectAfterToday()
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
+
+
+const getByUserAfterToday = async (req, res) => {
+    const { userId } = req.params
+    try {
+        const [result] = await reservationsModel.selectByUserAfterToday(userId)
         res.json(result)
 
     } catch (error) {
@@ -45,6 +68,16 @@ const getUser = async (req, res) => {
     try {
         const [result] = await reservationsModel.selectByUserId(userId)
         res.json(result)
+    } catch (error) {
+        res.json({ error: error.message })
+    }
+}
+
+const getById = async (req, res) => {
+    const { reservationId } = req.params
+    try {
+        const [result] = await reservationsModel.selectById(reservationId)
+        res.json(result[0])
     } catch (error) {
         res.json({ error: error.message })
     }
@@ -89,5 +122,5 @@ const removeId = async (req, res) => {
 }
 
 
-module.exports = { getAll, getUser, addTable, update, removeId, getAllByShifts, getAllBeforeToday, getAllAfterToday }
+module.exports = { getAll, getUser, addTable, update, removeId, getAllByShifts, getAllBeforeToday, getAllAfterToday, getByUserBeforeToday, getByUserAfterToday, getById }
 

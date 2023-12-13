@@ -12,10 +12,15 @@ router.get("/byshifts", checkRole('admin'), reservationsController.getAllByShift
 
 router.get("/before", checkRole('admin'), reservationsController.getAllBeforeToday);
 
+router.get('/before/:userId', reservationsController.getByUserBeforeToday)
+
 router.get("/after", checkRole('admin'), reservationsController.getAllAfterToday);
 
+router.get('/after/:userId', reservationsController.getByUserAfterToday)
 
-router.get("/:userId", reservationsController.getUser)
+router.get("/user/:userId", reservationsController.getUser)
+
+router.get('/:reservationId', reservationsController.getById)
 
 router.post("/", checkRole('admin'), reservationsController.addTable)
 
