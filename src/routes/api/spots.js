@@ -8,8 +8,12 @@ router.get("/", spotsController.getAll)
 
 router.post("/", spotsController.create)
 
+router.post("/but", spotsController.postAllBut)
+
 router.put("/:spotId", spotsController.update)
 
 router.delete("/:spotId", spotsController.remove)
+
+
 
 module.exports = router

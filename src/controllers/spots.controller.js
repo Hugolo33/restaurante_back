@@ -39,5 +39,13 @@ const remove = async (req, res) => {
         res.json({ fatal: error.message })
     }
 };
+const postAllBut = async (req, res) => {
+    try {
+        const [result] = await spotsModel.selectAllBut(req.body);
+        res.json(result)
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+};
 
-module.exports = { getAll, create, update, remove };
+module.exports = { getAll, create, update, remove, postAllBut };

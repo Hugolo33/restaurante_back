@@ -18,7 +18,9 @@ const deleteById = (spotId) => {
     return db.query("delete from restaurant.spots reservations where id = ?", [spotId])
 }
 
+const selectAllBut = ({ spotsIds }) => {
+    return db.query("select * from spots where id not in (?)", [spotsIds])
+}
 
 
-
-module.exports = { selectAll, selectById, insert, updateById, deleteById };
+module.exports = { selectAll, selectById, insert, updateById, deleteById, selectAllBut };
