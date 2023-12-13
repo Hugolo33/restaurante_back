@@ -2,8 +2,8 @@ const selectAll = () => {
     return db.query("select * from restaurant.reservations")
 }
 
-const selectAllByShifts = () => {
-    return db.query("select r.*, s.time, s.daytime from reservations as r join shifts as s on r.shift_id = s.id order by r.r_date desc, s.time asc")
+const selectAllByShifts = ({ r_date, time }) => {
+    return db.query("select r.*, s.time from reservations as r join shifts as s on r.shift_id = s.id where r.r_date=? and s.time = ? order by r.r_date desc, s.time asc", [r_date, time])
 }
 const selectBeforeToday = () => {
     return db.query("select * from restaurant.reservations where r_date <= now()")

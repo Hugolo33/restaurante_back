@@ -12,7 +12,7 @@ const getAll = async (req, res) => {
 
 const getAllByShifts = async (req, res) => {
     try {
-        const [result] = await reservationsModel.selectAllByShifts()
+        const [result] = await reservationsModel.selectAllByShifts(req.body)
         res.json(result)
 
     } catch (error) {
