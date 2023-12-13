@@ -11,9 +11,9 @@ const selectId = (id) => {
     return db.query(`select * from menu where id = ?`, [id]);
 }
 
-const insert = ({ date, first_course, main_course }) => {
+const insert = ({ m_date, first_course, main_course, dessert, price }) => {
 
-    return db.query('insert into menu (m_date, first_course, main_course) values (?,?,?)', [date, first_course, main_course]);
+    return db.query('insert into menu (m_date, first_course, main_course, dessert, price) values (?,?,?,?,?)', [m_date, first_course, main_course, dessert, price]);
 }
 
 
