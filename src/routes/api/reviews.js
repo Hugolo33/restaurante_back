@@ -4,6 +4,7 @@ const reviewController = require('../../controllers/review.controller');
 const { checkRole, checkToken } = require('../../helpers/middlewares');
 
 router.get('/', reviewController.getAll);
+router.get('/latestFour', reviewController.getLatestFour)
 router.get('/:reviewId', reviewController.getById)
 
 router.post('/', checkToken, reviewController.create);
