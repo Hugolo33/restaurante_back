@@ -113,7 +113,7 @@ const removeId = async (req, res) => {
     const { reservationId } = req.params
 
     try {
-        const [result] = await reservationsModel.update(reservationId)
+        const [result] = await reservationsModel.deleteById(reservationId)
         res.json(result)
 
     } catch (error) {
