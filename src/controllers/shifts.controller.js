@@ -11,6 +11,17 @@ const getAll = async (req, res) => {
     }
 }
 
+const getById = async (req, res) => {
+    const { shiftId } = req.params
+    try {
+        const [result] = await shiftsModel.selectById(shiftId)
+        res.json(result[0])
+    } catch (error) {
+        res.json({ fatal: error.message })
+
+    }
+}
+
 const create = async (req, res) => {
 
     try {
@@ -50,4 +61,4 @@ const remove = async (req, res) => {
 
 
 
-module.exports = { getAll, create, update, remove }
+module.exports = { getAll, create, update, remove, getById }
