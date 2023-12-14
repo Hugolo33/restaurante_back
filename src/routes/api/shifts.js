@@ -5,6 +5,7 @@ const shiftsController = require("../../controllers/shifts.controller")
 // la url viene con /api/shifts
 
 router.get("/", shiftsController.getAll)
+router.get('/:shiftId', shiftsController.getById)
 
 router.post("/", shiftsController.create)
 
