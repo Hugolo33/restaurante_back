@@ -19,6 +19,15 @@ const getById = async (req, res) => {
     }
 };
 
+const getLatestFour = async (req, res) => {
+    try {
+        const [result] = await ReviewModel.selectLatestFour()
+        res.json(result)
+    } catch (error) {
+        res.json({ error: error.message })
+    }
+}
+
 const create = async (req, res) => {
     try {
         const [result] = await ReviewModel.insert(req.body);
@@ -46,4 +55,4 @@ const remove = async (req, res) => {
 }
 
 
-module.exports = { getAll, create, remove, getById };
+module.exports = { getAll, create, remove, getById, getLatestFour };

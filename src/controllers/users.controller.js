@@ -18,6 +18,17 @@ const create = async (req, res) => {
     }
 }
 
+
+const getById = async (req, res) => {
+    const { userId } = req.params
+    try {
+        const [result] = await UserModel.selectById(userId)
+        res.json(result[0])
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+}
+
 const login = async (req, res) => {
     const { email, password } = req.body
     try {
@@ -68,4 +79,4 @@ const deleteById = async (req, res) => {
 }
 
 
-module.exports = { create, login, update, deleteById };
+module.exports = { create, login, update, deleteById, getById };
