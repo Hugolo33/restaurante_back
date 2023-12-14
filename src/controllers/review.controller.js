@@ -28,6 +28,15 @@ const getLatestFour = async (req, res) => {
     }
 }
 
+const getAllAdmin = async (req, res) => {
+    try {
+        const [result] = await ReviewModel.selectAllAdmin()
+        res.json(result)
+    } catch (error) {
+        res.json({ error: error.message })
+    }
+}
+
 const create = async (req, res) => {
     try {
         const [result] = await ReviewModel.insert(req.body);
@@ -55,4 +64,4 @@ const remove = async (req, res) => {
 }
 
 
-module.exports = { getAll, create, remove, getById, getLatestFour };
+module.exports = { getAll, create, remove, getById, getLatestFour, getAllAdmin };

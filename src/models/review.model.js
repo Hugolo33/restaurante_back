@@ -2,6 +2,10 @@ const selectAll = () => {
     return db.query('select * from reviews order by date_added desc');
 };
 
+const selectAllAdmin = () => {
+    return db.query('select rw.*, r.r_date, u.name, u.email, s.daytime from restaurant.reviews as rw join restaurant.reservations as r on rw.reservation_id = r.id join restaurant.users as u on rw.user_id = u.id join restaurant.shifts as s on r.shift_id = s.id order by rw.date_added desc')
+}
+
 const selectById = (reviewId) => {
     return db.query('select * from reviews where id = ?', [reviewId]);
 }
@@ -18,4 +22,4 @@ const remove = (reviewId) => {
     return db.query("delete from reviews where id = ?", [reviewId])
 }
 
-module.exports = { selectAll, insert, selectById, remove, selectLatestFour };
+module.exports = { selectAll, insert, selectById, remove, selectLatestFour, selectAllAdmin };

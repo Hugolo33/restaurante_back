@@ -6,19 +6,19 @@ const selectAllByShifts = ({ r_date, time }) => {
     return db.query("select r.*, s.time from reservations as r join shifts as s on r.shift_id = s.id where r.r_date=? and s.time = ? order by r.r_date desc, s.time asc", [r_date, time])
 }
 const selectBeforeToday = () => {
-    return db.query("select * from restaurant.reservations where r_date <= now()")
+    return db.query('select r.*, s.time, u.name, u.email, u.phone_number from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id join restaurant.users as u on r.user_id = u.id where  r_date <= now() order by r.r_date asc, s.time asc')
 }
 
 const selectByUserBeforeToday = (userId) => {
-    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date <= now()order by r.r_date desc', [userId])
+    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date <= now() order by r.r_date asc, s.time asc', [userId])
 }
 
 const selectByUserAfterToday = (userId) => {
-    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date > now()order by r.r_date asc, s.time asc', [userId])
+    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date > now() order by r.r_date asc, s.time asc', [userId])
 }
 
 const selectAfterToday = () => {
-    return db.query("select * from restaurant.reservations where r_date >= now()")
+    return db.query('select r.*, s.time, u.name, u.email, u.phone_number from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id join restaurant.users as u on r.user_id = u.id where  r_date > now() order by r.r_date asc, s.time asc')
 }
 
 const selectById = (reservationId) => {
@@ -36,7 +36,7 @@ const update = (reservationId, { r_date, diners, notes, user_id, spot_id, shift_
 
 
 const deleteById = (reservationId) => {
-    return db.query("delete from restaurant.reservations reservations where id = ?", [reservationId])
+    return db.query("delete from restaurant.reservations where id = ?", [reservationId])
 }
 
 const selectByUserId = (userId) => {
