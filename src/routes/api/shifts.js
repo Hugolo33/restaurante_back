@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const { checkRole, checkToken } = require("../../helpers/middlewares")
 
 const shiftsController = require("../../controllers/shifts.controller")
 
@@ -7,11 +8,11 @@ const shiftsController = require("../../controllers/shifts.controller")
 router.get("/", shiftsController.getAll)
 router.get('/:shiftId', shiftsController.getById)
 
-router.post("/", shiftsController.create)
+router.post("/", checkToken, checkRole, shiftsController.create)
 
-router.put("/:shiftId", shiftsController.update)
+router.put("/:shiftId", checkToken, checkRole, shiftsController.update)
 
-router.delete("/:shiftId", shiftsController.remove)
+router.delete("/:shiftId", checkToken, checkRole, shiftsController.remove)
 
 
 module.exports = router

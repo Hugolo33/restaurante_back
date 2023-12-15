@@ -12,7 +12,9 @@ const getAll = async (req, res) => {
 const create = async (req, res) => {
     try {
         const [result] = await spotsModel.insert(req.body)
-        res.json(result)
+        const { insertId } = result
+        const newSpot = await spotsModel.selectById(insertId)
+        res.json(newSpot[0])
     } catch (error) {
         res.json({ fatal: error.message })
     }
