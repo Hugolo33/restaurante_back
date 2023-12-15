@@ -53,9 +53,42 @@ const create = async (req, res) => {
 }
 
 
+const updateMenu = async (req, res) => {
+
+    const { menuId } = req.params
+    
+    try {
+        req.body.id = menuId
+        console.log("esto es menuId");
+        console.log(menuId);
+        const [result] = await menuModel.update(menuId, req.body)
+        console.log(result)
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
+
+
+const deleteMenu = async (req, res) => {
+    const { menuId } = req.params
+
+    try {
+        const [result] = await menuModel.deleteById(menuId)
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
+
+
 module.exports = {
     getAll,
     getMenuById,
     create,
-    getLatest
+    getLatest,
+    deleteMenu,
+    updateMenu
 }

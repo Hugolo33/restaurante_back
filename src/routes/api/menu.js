@@ -10,5 +10,7 @@ router.get('/', checkToken, checkRole('admin'), menuController.getAll);
 router.get('/latest', menuController.getLatest);
 router.get('/:menuId', menuController.getMenuById);
 router.post('/', checkToken, checkRole('admin'), menuController.create);
+router.put("/:menuId", menuController.updateMenu)
+router.delete("/:menuId", menuController.deleteMenu)
 
 module.exports = router;
