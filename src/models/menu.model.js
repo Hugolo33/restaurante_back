@@ -17,9 +17,21 @@ const insert = ({ m_date, first_course, main_course, dessert, price }) => {
 }
 
 
+const update = (menuId, { m_date, first_course, main_course, dessert, price }) => {
+    return db.query("update menu set m_date = ?, first_course = ?, main_course = ?, dessert = ?, price = ? where id = ?", [m_date, first_course, main_course, dessert, price, menuId])
+}
+
+
+const deleteById = (menuId) => {
+    return db.query("delete from restaurant.menu where id = ?", [menuId])
+}
+
+
 module.exports = {
     selectAll,
     selectId,
     insert,
-    selectLatest
+    selectLatest,
+    deleteById,
+    update
 };
