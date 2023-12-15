@@ -22,7 +22,7 @@ router.get("/user/:userId", reservationsController.getUser)
 
 router.get('/:reservationId', reservationsController.getById)
 
-router.post("/", checkRole('admin'), reservationsController.addTable)
+router.post("/", reservationsController.addTable)
 
 router.put("/:reservationId", reservationsController.update)
 
