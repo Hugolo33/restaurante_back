@@ -8,7 +8,7 @@ const { checkRole, checkToken } = require('../../helpers/middlewares')
 
 router.get("/", checkRole('admin'), reservationsController.getAll)
 
-router.post("/byshifts", checkRole('admin'), reservationsController.postAllByShifts);
+router.post("/byshifts", reservationsController.postAllByShifts);
 
 router.get("/before", checkRole('admin'), reservationsController.getAllBeforeToday);
 
@@ -24,7 +24,7 @@ router.get('/:reservationId', reservationsController.getById)
 
 router.post("/", checkRole('admin'), reservationsController.addTable)
 
-router.put("/:reservationId", checkToken, reservationsController.update)
+router.put("/:reservationId", reservationsController.update)
 
 router.delete("/:reservationId", reservationsController.removeId)
 
