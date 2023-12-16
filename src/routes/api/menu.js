@@ -8,6 +8,7 @@ const { checkRole, checkToken } = require("../../helpers/middlewares.js")
 
 router.get('/', checkToken, checkRole('admin'), menuController.getAll);
 router.get('/latest', menuController.getLatest);
+router.get('/date/:menuDate', menuController.getByDate);
 router.get('/:menuId', menuController.getMenuById);
 router.post('/', checkToken, checkRole('admin'), menuController.create);
 router.put("/:menuId", menuController.updateMenu)

@@ -8,11 +8,11 @@ const shiftsController = require("../../controllers/shifts.controller")
 router.get("/", shiftsController.getAll)
 router.get('/:shiftId', shiftsController.getById)
 
-router.post("/", checkToken, checkRole, shiftsController.create)
+router.post("/", checkToken, checkRole('admin'), shiftsController.create)
 
-router.put("/:shiftId", checkToken, checkRole, shiftsController.update)
+router.put("/:shiftId", checkToken, checkRole('admin'), shiftsController.update)
 
-router.delete("/:shiftId", checkToken, checkRole, shiftsController.remove)
+router.delete("/:shiftId", checkToken, checkRole('admin'), shiftsController.remove)
 
 
 module.exports = router
