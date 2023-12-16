@@ -88,7 +88,7 @@ const addTable = async (req, res) => {
         const [result] = await reservationsModel.insert(req.body)
         const { insertId } = result
         const [newReservation] = await reservationsModel.selectById(insertId)
-        res.json(newReservation)
+        res.json(newReservation[0])
     } catch (error) {
         res.json({ fatal: error.message })
     }

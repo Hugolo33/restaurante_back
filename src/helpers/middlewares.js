@@ -16,7 +16,6 @@ const checkToken = async (req, res, next) => {
 
     const [result] = await User.selectById(payload.user_id)
     req.user = result[0]
-    console.log(req.user);
     next()
 }
 

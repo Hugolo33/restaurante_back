@@ -26,7 +26,9 @@ const create = async (req, res) => {
 
     try {
         const [result] = await shiftsModel.insert(req.body)
-        res.json(result)
+        const { insertId } = result
+        const newShift = await shiftsModel.selectById(insertId)
+        res.json(newShift)
 
     } catch (error) {
         res.json({ fatal: error.message })

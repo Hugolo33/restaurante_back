@@ -2,23 +2,36 @@ const menuModel = require('../models/menu.model');
 
 
 const getAll = async (req, res) => {
-    // si la peticion atraviesa con extio el metodo checkToken, puedo acceder al valor de req.user
 
-    // console.log('FINAL', req.user);
-
-    //Solo puede acceder el admin
-
-    const [result] = await menuModel.selectAll();
-
-    res.json(result);
+    try {
+        const [result] = await menuModel.selectAll();
+        res.json(result);
+    } catch (error) {
+        res.json({ error: error.message })
+    }
 }
 
 const getLatest = async (req, res) => {
+    try {
+        const [result] = await menuModel.selectLatest();
+        const lastMenu = result[0];
+        res.json(lastMenu);
+    } catch (error) {
+        res.json({ error: error.message })
+    }
 
 
-    const [result] = await menuModel.selectLatest();
-    const lastMenu = result[0];
-    res.json(lastMenu);
+}
+
+const getByDate = async (req, res) => {
+    const { menuDate } = req.params
+    console.log(menuDate);
+    try {
+        const [menu] = await menuModel.selectByDate(menuDate)
+        res.json(menu[0])
+    } catch (error) {
+        res.json({ error: error.message })
+    }
 }
 
 
@@ -57,5 +70,6 @@ module.exports = {
     getAll,
     getMenuById,
     create,
-    getLatest
+    getLatest,
+    getByDate
 }
