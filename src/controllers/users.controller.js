@@ -3,6 +3,18 @@ const { createToken } = require('../helpers/utils');
 
 const UserModel = require('../models/user.model');
 
+// importamos librería nodemailer
+const nodemailer = require('nodemailer')
+const transporter = nodemailer.createTransport({
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    secure: true,
+    auth: {
+        user: "",
+        pass: ""
+    }
+})
+
 
 const create = async (req, res) => {
     // BODY: name, email, password, phone_number,role 
