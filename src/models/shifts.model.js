@@ -1,5 +1,5 @@
 const selectAll = () => {
-    return db.query("select * from restaurant.shifts")
+    return db.query("select * from restaurant.shifts order by time asc")
 }
 
 const insert = ({ time, daytime }) => {
