@@ -6,13 +6,13 @@ const spotsController = require("../../controllers/spots.controller");
 
 router.get("/", spotsController.getAll)
 
-router.post("/", spotsController.create)
+router.post("/", checkRole('admin'), spotsController.create)
 
 router.post("/but", spotsController.postAllBut)
 
-router.put("/:spotId", spotsController.update)
+router.put("/:spotId", checkRole('admin'), spotsController.update)
 
-router.delete("/:spotId", spotsController.remove)
+router.delete("/:spotId", checkRole('admin'), spotsController.remove)
 
 
 
