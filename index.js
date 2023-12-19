@@ -8,6 +8,11 @@ require('dotenv').config();
 //Configuración BBDD
 require('./src/config/db')
 
+// Importamos body-parser
+const bodyParser = require("body-parser")
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
+
 // Creación server
 const server = http.createServer(app);
 

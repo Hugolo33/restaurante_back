@@ -1,3 +1,4 @@
+const { envioCorreo } = require("../helpers/utils")
 const reservationsModel = require("../models/reservations.model")
 
 const getAll = async (req, res) => {
@@ -88,7 +89,11 @@ const addTable = async (req, res) => {
         const [result] = await reservationsModel.insert(req.body)
         const { insertId } = result
         const [newReservation] = await reservationsModel.selectById(insertId)
+
+        envioCorreo("andrespolo13@gmail.com", "RESERVA REALIZADA", "Todo ha ido muy bien, eres genial Andrés")
+
         res.json(newReservation[0])
+
     } catch (error) {
         res.json({ fatal: error.message })
     }
