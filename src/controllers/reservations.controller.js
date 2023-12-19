@@ -89,8 +89,11 @@ const addTable = async (req, res) => {
         const [result] = await reservationsModel.insert(req.body)
         const { insertId } = result
         const [newReservation] = await reservationsModel.selectById(insertId)
+        const  email  = req.body.email
+        
+        console.log(email);
 
-        envioCorreo("andrespolo13@gmail.com", "RESERVA REALIZADA", "Todo ha ido muy bien, eres genial Andrés")
+        envioCorreo(email, "RESERVA REALIZADA", "Todo ha ido muy bien, eres genial Andrés")
 
         res.json(newReservation[0])
 
