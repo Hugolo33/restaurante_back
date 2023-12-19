@@ -22,7 +22,7 @@ router.get("/user/:userId", reservationsController.getUser)
 
 router.get('/:reservationId', reservationsController.getById)
 
-router.post("/", reservationsController.addTable)
+router.post("/", reservationsController.create)
 
 router.put("/:reservationId", reservationsController.update)
 
