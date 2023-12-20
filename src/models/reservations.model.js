@@ -18,7 +18,7 @@ const selectByUserAfterToday = (userId) => {
 }
 
 const selectAfterToday = () => {
-    return db.query('select r.*, s.time, u.name, u.email, u.phone_number from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id join restaurant.users as u on r.user_id = u.id where  r_date >= now() order by r.r_date asc, s.time asc')
+    return db.query('select r.*, s.time, u.name, u.email, u.phone_number from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id join restaurant.users as u on r.user_id = u.id where  r_date >= now() order by r.r_date asc, s.time desc')
 }
 
 const selectById = (reservationId) => {
