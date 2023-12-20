@@ -106,7 +106,7 @@ const create = async (req, res) => {
         const [result5] = await spotModel.selectById(req.body.spot_id)
         spot = result5[0]
 
-        const emailBody = `¡Hola, ${user.name}!
+        const emailClient = `¡Hola, ${user.name}!
         Estamos muy emocionados de recibirte próximamente en Casa Miranda.
         Aquí tienes los datos de tu reserva:
         Fecha:${dayjs(newReservation.r_date).format('DD/MM/YYYY')}
@@ -120,13 +120,15 @@ const create = async (req, res) => {
         Calle del Acuerdo, nº 1 Madrid
         proyecto.casa.miranda@gmail.com`
 
-        envioCorreo(email, "Tu reserva en Casa Miranda", emailBody)
+        envioCorreo(email, "Tu reserva en Casa Miranda", emailClient)
 
         const emailAdmin = `Se ha realizado una reserva nueva en el restaurante a través de la web.
         Aquí la información:
         Fecha: ${dayjs(newReservation.r_date).format('DD/MM/YYYY')}
         Hora: ${shift.time} 
         Comensales: ${spot.max_seating}
+        Cliente: ${user.name}
+        Datos de contacto: ${user.email} / ${user.phone_number}
         Comentarios del cliente: ${newReservation.notes}
         Mesa: #${spot.id} ${spot.title}`
 
