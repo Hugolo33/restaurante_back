@@ -10,11 +10,11 @@ const selectBeforeToday = () => {
 }
 
 const selectByUserBeforeToday = (userId) => {
-    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date < now() order by r.r_date asc, s.time asc', [userId])
+    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date < date(now()) order by r.r_date asc, s.time asc', [userId])
 }
 
 const selectByUserAfterToday = (userId) => {
-    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date >= now() order by r.r_date asc, s.time asc', [userId])
+    return db.query('select r.*, s.time from restaurant.reservations as r join restaurant.shifts as s on r.shift_id = s.id where user_id = ? and r_date >= date(now()) order by r.r_date asc, s.time asc', [userId])
 }
 
 const selectAfterToday = () => {
