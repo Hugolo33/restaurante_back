@@ -3,6 +3,7 @@ const reservationsModel = require("../models/reservations.model")
 const userModel = require('../models/user.model')
 const shiftModel = require('../models/shifts.model')
 const dayjs = require('dayjs')
+const { emailConfirmation } = require("../helpers/html-templates")
 
 const getAll = async (req, res) => {
     try {
@@ -104,22 +105,24 @@ const create = async (req, res) => {
         shift = result4[0]
         console.log('shift', shift);
 
-        const emailBody = `¡Hola, ${user.name}!
-        Estamos muy emocionados de recibirte próximamente en Casa Miranda.
-        Aquí tienes los datos de tu reserva:
-        Fecha:${dayjs(newReservation.r_date).format('DD/MM/YYYY')}
-        Hora: ${shift.time} 
-        Comentarios: ${newReservation.notes}
-        Para realizar cambios en tu reserva, por favor accede a tu perfil dentro de nuestra web
-        ¡Nos vemos pronto!
-        El equipo de Casa Miranda
-        91 345 23 67
-        Calle del Acuerdo, nº 1 Madrid
-        proyecto.casa.miranda@gmail.com`
+        // const emailBody = `¡Hola, ${user.name}!
+        // Estamos muy emocionados de recibirte próximamente en Casa Miranda.
+        // Aquí tienes <strong>los datos</strong> de tu reserva:
+        // Fecha:${dayjs(newReservation.r_date).format('DD/MM/YYYY')}
+        // Hora: ${shift.time} 
+        // Comentarios: ${newReservation.notes}
+        // Para realizar cambios en tu reserva, por favor accede a tu perfil dentro de nuestra web
+        // ¡Nos vemos pronto!
+        // El equipo de Casa Miranda
+        // 91 345 23 67
+        // Calle del Acuerdo, nº 1 Madrid
+        // proyecto.casa.miranda@gmail.com`
+
+        const emailBody = emailConfirmation(user, newReservation, shift);
+        console.log(emailBody);
 
 
-
-        envioCorreo(email, "Tu reserva en Casa Miranda", emailBody)
+        envioCorreo(email, "Tu reserva en Casa Miranda 🌶", emailBody)
 
         res.json(newReservation)
 
