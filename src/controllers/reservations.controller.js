@@ -4,6 +4,7 @@ const userModel = require('../models/user.model')
 const shiftModel = require('../models/shifts.model')
 const spotModel = require('../models/spots.model')
 const dayjs = require('dayjs')
+const { emailConfirmation } = require("../helpers/html-templates")
 
 const getAll = async (req, res) => {
     try {
@@ -106,21 +107,8 @@ const create = async (req, res) => {
         const [result5] = await spotModel.selectById(req.body.spot_id)
         spot = result5[0]
 
-        const emailClient = `¡Hola, ${user.name}!
-        Estamos muy emocionados de recibirte próximamente en Casa Miranda.
-        Aquí tienes los datos de tu reserva:
-        Fecha:${dayjs(newReservation.r_date).format('DD/MM/YYYY')}
-        Hora: ${shift.time} 
-        Comensales: ${spot.max_seating}
-        Comentarios: ${newReservation.notes}
-        Para realizar cambios en tu reserva, por favor accede a tu perfil dentro de nuestra web
-        ¡Nos vemos pronto!
-        El equipo de Casa Miranda
-        91 345 23 67
-        Calle del Acuerdo, nº 1 Madrid
-        proyecto.casa.miranda@gmail.com`
-
-        envioCorreo(email, "Tu reserva en Casa Miranda", emailClient)
+        const emailBody = emailConfirmation(user, newReservation, shift);
+        console.log(emailBody);
 
         const emailAdmin = `Se ha realizado una reserva nueva en el restaurante a través de la web.
         Aquí la información:
@@ -133,6 +121,7 @@ const create = async (req, res) => {
         Mesa: #${spot.id} ${spot.title}`
 
         envioCorreo('proyecto.casa.miranda@gmail.com', "Nueva reserva a través de la web", emailAdmin)
+        envioCorreo(email, "Tu reserva en Casa Miranda 🌶", emailBody)
 
         res.json(newReservation)
 

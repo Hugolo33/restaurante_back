@@ -13,34 +13,37 @@ const createToken = (user) => {
 // importamos librería nodemailer
 const nodemailer = require('nodemailer');
 
-const envioCorreo = (email, asunto, texto) => {
-
+const envioCorreo = async (email, asunto, texto) => {
+    console.log('ENTRA EN EL PUTO ENVÍO');
     let config = nodemailer.createTransport({
-        service: 'gmail',       
+        service: 'gmail',
         auth: {
             user: "proyecto.casa.miranda@gmail.com",
             pass: "trmy gyzw srfw edid"
         },
-        
+
     })
 
     const opciones = {
         from: 'proyecto.casa.miranda@gmail.com',
         subject: asunto,
         to: email,
-        text: texto
+        text: texto,
+        html: texto
     }
-   
 
-    config.sendMail(opciones, function(error, result) {
 
-        if (error) console.log({ok:false, msg:error})
+    const responseMail = config.sendMail(opciones, function (error, result) {
 
-            console.log({
-                ok: true,
-                msg: result
-            })
-    })
+        if (error) console.log({ ok: false, msg: error })
+
+        console.log({
+            ok: true,
+            msg: result
+        })
+    });
+
+    console.log(responseMail);
 
 }
 
