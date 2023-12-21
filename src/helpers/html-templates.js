@@ -141,6 +141,7 @@ font-family: 'Syne', sans-serif;
                         Fecha:${dayjs(newReservation.r_date).format('DD/MM/YYYY')}
                         Hora: ${shift.time}
                         Comentarios: ${newReservation.notes}
+                        Comensales: ${spot.max_seating}
                     </p>
                     <p>
                         Para realizar cambios en tu reserva, por favor accede a tu perfil dentro de nuestra web
