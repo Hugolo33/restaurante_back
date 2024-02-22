@@ -20,13 +20,25 @@ const insert = ({ m_date, first_course, main_course, dessert, price }) => {
 }
 
 
-const update = (menuId, { m_date, first_course, main_course, dessert, price }) => {
-    return db.query("update menu set m_date = ?, first_course = ?, main_course = ?, dessert = ?, price = ? where id = ?", [m_date, first_course, main_course, dessert, price, menuId])
+const update = (menuId, { m_date, first_course, main_course, dessert, price, main }) => {
+    return db.query("update menu set m_date = ?, first_course = ?, main_course = ?, dessert = ?, price = ?, main = ? where id = ?", [m_date, first_course, main_course, dessert, price, menuId, main])
 }
 
 
 const deleteById = (menuId) => {
     return db.query("delete from restaurant.menu where id = ?", [menuId])
+}
+
+const removeMain = (menuId, { m_date, first_course, main_course, dessert, price }) => {
+    return db.query("update menu set m_date = ?, first_course = ?, main_course = ?, dessert = ?, price = ?, main = 0 where id = ?", [m_date, first_course, main_course, dessert, price, menuId])
+}
+
+const selectMain = () => {
+    return db.query(`select * from menu where main = 1`);
+}
+
+const addMain = (menuId, { m_date, first_course, main_course, dessert, price }) => {
+    return db.query("update menu set m_date = ?, first_course = ?, main_course = ?, dessert = ?, price = ?, main = 1 where id = ?", [m_date, first_course, main_course, dessert, price, menuId])
 }
 
 
@@ -37,5 +49,8 @@ module.exports = {
     selectLatest,
     deleteById,
     update,
-    selectByDate
+    selectByDate,
+    removeMain,
+    selectMain,
+    addMain
 };

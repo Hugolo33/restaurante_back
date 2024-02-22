@@ -96,6 +96,46 @@ const deleteMenu = async (req, res) => {
     }
 }
 
+const removeMainMenu = async (req, res) => {
+
+    const { menuId } = req.params
+
+    try {
+        req.body.id = menuId
+        console.log(menuId);
+        const [result] = await menuModel.update(menuId, req.body)
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
+
+const getMain = async (req, res) => {
+
+    try {
+        const [result] = await menuModel.selectMain()
+        res.json(result[0]);
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
+
+const addMainMenu = async (req, res) => {
+
+    const { menuId } = req.params
+
+    try {
+        req.body.id = menuId
+        console.log(menuId);
+        const [result] = await menuModel.update(menuId, req.body)
+        res.json(result)
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+}
+
 
 module.exports = {
     getAll,
@@ -104,5 +144,8 @@ module.exports = {
     getLatest,
     deleteMenu,
     updateMenu,
-    getByDate
+    getByDate,
+    removeMainMenu,
+    getMain,
+    addMainMenu
 }
