@@ -21,7 +21,7 @@ const insert = ({ m_date, first_course, main_course, dessert, price }) => {
 
 
 const update = (menuId, { m_date, first_course, main_course, dessert, price, main }) => {
-    return db.query("update menu set m_date = ?, first_course = ?, main_course = ?, dessert = ?, price = ?, main = ? where id = ?", [m_date, first_course, main_course, dessert, price, menuId, main])
+    return db.query("update menu set m_date = ?, first_course = ?, main_course = ?, dessert = ?, price = ?, main = ? where id = ?", [m_date, first_course, main_course, dessert, price, main, menuId])
 }
 
 
