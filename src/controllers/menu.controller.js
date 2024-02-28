@@ -103,8 +103,9 @@ const removeMainMenu = async (req, res) => {
     try {
         req.body.id = menuId
         console.log(menuId);
-        const [result] = await menuModel.update(menuId, req.body)
-        res.json(result)
+        const [result] = await menuModel.removeMain(menuId, req.body)
+        const [oldMain] = await menuModel.selectId(menuId)
+        res.json(oldMain[0])
 
     } catch (error) {
         res.json({ fatal: error.message })
@@ -128,8 +129,9 @@ const addMainMenu = async (req, res) => {
     try {
         req.body.id = menuId
         console.log(menuId);
-        const [result] = await menuModel.update(menuId, req.body)
-        res.json(result)
+        const [result] = await menuModel.addMain(menuId, req.body)
+        const [mainMenu] = await menuModel.selectId(menuId)
+        res.json(mainMenu[0])
 
     } catch (error) {
         res.json({ fatal: error.message })
