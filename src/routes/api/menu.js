@@ -12,9 +12,9 @@ router.get('/date/:menuDate', menuController.getByDate);
 router.get('/main', menuController.getMain);
 router.get('/:menuId', menuController.getMenuById);
 router.post('/', checkToken, checkRole('admin'), menuController.create);
-router.put("/:menuId", checkToken, checkRole('admin'), menuController.updateMenu);
 router.put('/removemain/:menuId', checkToken, checkRole('admin'), menuController.removeMainMenu);
 router.put('/addmain/:menuId', checkToken, checkRole('admin'), menuController.addMainMenu);
+router.put("/:menuId", checkToken, checkRole('admin'), menuController.updateMenu);
 router.delete("/:menuId", checkToken, checkRole('admin'), menuController.deleteMenu)
 
 module.exports = router;
