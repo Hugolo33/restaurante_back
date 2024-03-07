@@ -7,7 +7,7 @@ const UserModel = require('../models/user.model');
 
 
 const create = async (req, res) => {
-    // BODY: name, email, password, phone_number,role 
+    // BODY: name, lastname, email, password, phone_number,role 
     try {
         req.body.password = bcrypt.hashSync(req.body.password, 8);
 
